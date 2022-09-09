@@ -49,7 +49,7 @@ class ppcoVideoFormGUI extends ilPropertyFormGUI {
             $this->addCommandButton(ilPanoptoPageComponentPluginGUI::CMD_CREATE, $this->lng->txt('create'));
 
             $item = new ilCustomInputGUI('', 'xpan_choose_videos_link');
-            $url = 'https://' . xpanUtil::getServerName() . '/Panopto/Pages/Sessions/EmbeddedUpload.aspx?playlistsEnabled=true';
+            $url = 'https://' . xpanUtil::getServerName() . '/Panopto/Pages/Sessions/EmbeddedUpload.aspx?playlistsEnabled=true&instance=' . xpanUtil::getInstanceName();
             $onclick = "if(typeof(xpan_modal_opened) === 'undefined') { xpan_modal_opened = true; $('#xpan_iframe').attr('src', '" . $url . "');}"; // this avoids a bug in firefox (iframe source must be loaded on opening modal)
             $onclick .= "$('#xpan_modal').modal('show');";
             $item->setHtml("<a onclick=\"" . $onclick . "\">" . $this->pl->txt('choose_videos') . "<a>");
@@ -69,6 +69,7 @@ class ppcoVideoFormGUI extends ilPropertyFormGUI {
             $item->setHtml("<iframe src='" . 'https://' . xpanUtil::getServerName() . "/Panopto/Pages/Embed.aspx?"
                 . ($this->properties['is_playlist'] ? "p" : "")
                 . "id=" . $this->properties['id']
+                . "&instance=" . xpanUtil::getInstanceName()
                 . "&v=1' width='450' height='256'"
                 . "' frameborder='0' allowfullscreen></iframe>");
             $this->addItem($item);

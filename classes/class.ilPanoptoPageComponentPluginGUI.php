@@ -163,12 +163,14 @@ class ilPanoptoPageComponentPluginGUI extends ilPageComponentPluginGUI {
             return "<div class='ppco_iframe_container' style='" . $size_props . "'>" .
                 "<iframe src='https://" . xpanUtil::getServerName() . "/Panopto/Pages/Embed.aspx?"
                 . ($a_properties['is_playlist'] ? "p" : "") . "id=" . $a_properties['id']
+                . "&instance=" . xpanUtil::getInstanceName()
                 . "&v=1' frameborder='0' allowfullscreen style='width:100%;height:100%'></iframe></div>";
         }
 
         return "<div class='ppco_iframe_container' style='width:" . $a_properties['max_width'] . "%'>" .
             "<iframe src='https://" . xpanUtil::getServerName() . "/Panopto/Pages/Embed.aspx?"
             . ($a_properties['is_playlist'] ? "p" : "") . "id=" . $a_properties['id']
+            . "&instance=" . xpanUtil::getInstanceName()
             . "&v=1' frameborder='0' allowfullscreen style='width:100%;height:100%;position:absolute'></iframe></div>";
     }
 
@@ -182,7 +184,7 @@ class ilPanoptoPageComponentPluginGUI extends ilPageComponentPluginGUI {
         $modal->setId('xpan_modal');
         $modal->setType(ilModalGUI::TYPE_LARGE);
 		$modal->setHeading($this->pl->txt('modal_title_browse_and_embed'));
-        $url = 'https://' . xpanUtil::getServerName() . '/Panopto/Pages/Sessions/EmbeddedUpload.aspx?playlistsEnabled=true';
+        $url = 'https://' . xpanUtil::getServerName() . '/Panopto/Pages/Sessions/EmbeddedUpload.aspx?playlistsEnabled=true&instance=' . xpanUtil::getInstanceName();
         $modal->setBody('<iframe id="xpan_iframe" src="'.$url.'"></iframe>');
         $button = ilSubmitButton::getInstance();
         $button->setCaption('insert');
